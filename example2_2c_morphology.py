@@ -3,7 +3,7 @@ import cv2
 
 #Download 'ExampleBGSubtraction.avi' from https://drive.google.com/file/d/1OD_A0wqN2Om2SusCztybu-_hMSUQuRt7/view?usp=sharing
 
-cap = cv2.VideoCapture('ExampleBGSubtraction.avi')
+cap = cv2.VideoCapture('C:\\Users\\Nitro5\\Downloads\\ExampleBGSubtraction.av')
 
 haveFrame,bg = cap.read()
 
@@ -19,8 +19,10 @@ while(cap.isOpened()):
 
     bwmask_median = cv2.medianBlur(bwmask,5)
 
+    # =================================================
     kernel = np.ones((55,25), np.uint8)
     bwmask_close = cv2.morphologyEx(bwmask_median, cv2.MORPH_CLOSE, kernel)
+    # =================================================
 
     contours,hierarchy = cv2.findContours(bwmask_close, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 

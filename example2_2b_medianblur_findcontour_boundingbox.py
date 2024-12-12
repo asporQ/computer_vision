@@ -2,7 +2,7 @@ import cv2
 
 #Download 'ExampleBGSubtraction.avi' from https://drive.google.com/file/d/1OD_A0wqN2Om2SusCztybu-_hMSUQuRt7/view?usp=sharing
 
-cap = cv2.VideoCapture('ExampleBGSubtraction.avi')
+cap = cv2.VideoCapture('C:\\Users\\Nitro5\\Downloads\\ExampleBGSubtraction.avi')
 
 haveFrame,bg = cap.read()
 
@@ -16,15 +16,22 @@ while(cap.isOpened()):
     diffg = cv2.cvtColor(diffc,cv2.COLOR_BGR2GRAY)
     bwmask = cv2.inRange(diffg,50,255)
 
+    # median filter
+    # filter spike noise
     bwmask_median = cv2.medianBlur(bwmask,5)
 
+    # findContours = block detection to categorize the componet in picture
+    # using border following 
     contours,hierarchy = cv2.findContours(bwmask_median, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE) #for opencv 4.x.x
     #contourmask,contours,hierarchy = cv2.findContours(bwmask_median, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE) #for opencv 3.2.x 3.4.x
     #contourmask,contours,hierarchy = cv2.findContours(bwmask_median.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE) #for opencv 3.1.x
 
+    # beware if im_out_contour = im ; will be reference
     im_out_contour = im.copy()
     cv2.drawContours(im_out_contour, contours, -1, (0, 255, 0), 1)
 
+    # boundingbox (x, y, w, h) : box that fit the obj
+    # x, y @ top left conner
     im_out_boundingbox = im.copy()
     for cnt in contours:
         x, y, w, h = cv2.boundingRect(cnt)
