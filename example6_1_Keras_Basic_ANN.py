@@ -1,8 +1,8 @@
 #For Google Colab Version
 #https://colab.research.google.com/drive/1NNMXzedIkMiDH9GkiK6Tzp9HB9mjb0bl?usp=share_link
 
-from keras.models import Model
-from keras.layers import Input, Dense
+from tensorflow.keras import Model, Input
+from tensorflow.keras.layers import Dense
 import numpy as np
 
 #Create model
