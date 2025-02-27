@@ -3,7 +3,7 @@ import cv2
 tracker = cv2.legacy.TrackerTLD_create()
 #tracker = cv2.legacy.TrackerMedianFlow_create()
 #tracker = cv2.TrackerKCF_create()
-#tracker = cv2.TrackerCSRT_create()
+# tracker = cv2.TrackerCSRT_create()
 
 cap = cv2.VideoCapture(0)
 _, frame = cap.read()

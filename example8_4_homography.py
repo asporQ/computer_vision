@@ -1,15 +1,20 @@
 import numpy as np
 import cv2
 
+##### HOMOGRAPHIC TRANSFORMATION #####
+# create function to map p -> p' (point)
+# p' = H(p) ; H having 8 parameters ; atleast 4 keypoint 
+# match the keypoint pair
+
 cap = cv2.VideoCapture(0)
 
-detector = cv2.SIFT_create()
-matcher = cv2.BFMatcher()
+# detector = cv2.SIFT_create()
+# matcher = cv2.BFMatcher()
 
-#detector = cv2.ORB_create()
-#matcher = cv2.BFMatcher(cv2.NORM_HAMMING)
+detector = cv2.ORB_create()
+matcher = cv2.BFMatcher(cv2.NORM_HAMMING)
 
-ref = cv2.imread('conan1.jpg', cv2.COLOR_BGR2GRAY)
+ref = cv2.imread('C:\\Users\\Nitro5\\Downloads\\conan\\conan1.jpg', cv2.COLOR_BGR2GRAY)
 h,w,_ = ref.shape
 ref = cv2.resize(ref,(int(w*1.2),int(h*1.2)))
 
@@ -27,6 +32,7 @@ while (True):
         if m.distance < 0.7 * n.distance:
             good.append(m)
 
+    # atleast 18 point that match 
     if len(good) > 18:
         print(len(good))
         ref_pts = np.float32([kp1[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)

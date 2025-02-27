@@ -3,7 +3,7 @@ import numpy as np
 cap = cv2.VideoCapture(0)
 _, frame = cap.read()
 frame = cv2.flip(frame,1)
-prvs = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+prvs = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY) # convert color
 
 while(1):
     _, frame = cap.read()
@@ -23,8 +23,8 @@ while(1):
     #http://www.diva-portal.org/smash/get/diva2:273847/FULLTEXT01.pdf
 
     flowim = np.zeros_like(frame)
-    #flowim = frame.copy()
-    step = 10
+    # flowim = frame.copy()
+    step = 20
     for y in range(0, flow.shape[0]-1, step):
         for x in range(0, flow.shape[1] - 1, step):
             pt1 = (x, y)

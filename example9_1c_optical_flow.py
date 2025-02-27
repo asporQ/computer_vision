@@ -1,3 +1,5 @@
+# given color for the pixel not just vector 
+# if vector is long the pixel is brigther 
 import cv2
 import numpy as np
 cap = cv2.VideoCapture(0)

@@ -12,7 +12,7 @@ PATCH_SIZE = 21
 image = data.camera()
 
 # select some patches from grassy areas of the image
-grass_locations = [(474, 291), (440, 433), (466, 18), (462, 236)]
+grass_locations = [(474, 291), (440, 433), (466, 18), (462, 236)] # crop
 grass_patches = []
 for loc in grass_locations:
     grass_patches.append(image[loc[0]:loc[0] + PATCH_SIZE,
@@ -29,7 +29,7 @@ for loc in sky_locations:
 xs = []
 ys = []
 for patch in (grass_patches + sky_patches):
-    glcm = graycomatrix(patch, [5], [0], 256, symmetric=True, normed=True)
+    glcm = graycomatrix(patch, [5], [0], 256, symmetric=True, normed=True)  # find GLCM
     xs.append(graycoprops(glcm, 'contrast')[0, 0])
     ys.append(graycoprops(glcm, 'correlation')[0, 0])
 

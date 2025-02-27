@@ -10,12 +10,13 @@ colorlist = ["red","green","blue","olive","cyan"]
 
 hog = cv2.HOGDescriptor((50,50),(50,50),(50,50),(50,50),9)
 #WinSize, BlockSize, BlockStride, CellSize, NBins
+# BlockStride: ขยับจาก block ไปเท่าไร
 
 label_train = np.zeros((25,1))
 
 for char_id in range(0,5):
     for im_id in range(1,6):
-        im = cv2.imread("AtoF//"+charlist[char_id]+"//"+str(im_id)+".bmp",0)
+        im = cv2.imread("C:\\Users\\Nitro5\\OneDrive\\Documents\\CMU document\\cv\\computer_vision\\AtoF\\"+charlist[char_id]+"\\"+str(im_id)+".bmp",0)
 
         im = cv2.resize(im, (50, 50))
         im = cv2.GaussianBlur(im, (3, 3), 0)
@@ -35,8 +36,8 @@ for char_id in range(0,5):
         plt.plot(h,color=colorlist[char_id])
         plt.ylim(0, 1)
 
-print(features_train)
-print(label_train)
+print(features_train.shape)
+print(label_train.shape)
 plt.show()
 cv2.waitKey(0)
 cv2.destroyAllWindows()

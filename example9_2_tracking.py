@@ -1,3 +1,5 @@
+# track corner or point then create the tracking line
+
 import numpy as np
 import cv2
 
@@ -6,6 +8,7 @@ _, frame = cap.read()
 frame = cv2.flip(frame,1)
 prvs = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 ptmax = 30
+# find corner
 p0 = cv2.goodFeaturesToTrack(prvs,
                              mask=None,
                              maxCorners=ptmax,
@@ -29,7 +32,7 @@ while(1):
                                            maxLevel=3,
                                            criteria=(cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 0.03))
 
-    good_new = p1[st==1]
+    good_new = p1[st==1] # เอาเฉพาะจุดที่เจอ ถ้าไม่เจอแล้วจะหาย -> prev point = now point 
     good_old = p0[st==1]
 
     for i in range(0,len(good_new)):

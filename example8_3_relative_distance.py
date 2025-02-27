@@ -1,6 +1,9 @@
 import numpy as np
 import cv2
 
+##### FILTER MATCH ##### 
+# keypoint will matched when 
+# ||dest A - dest B|| and ||dest A - dest C|| -> ||dest A - dest B|| / ||dest A - dest C|| not -> to 1 (ค่ามีความต่างกันมาก)
 cap = cv2.VideoCapture(0)
 
 detector = cv2.SIFT_create()
@@ -9,7 +12,7 @@ matcher = cv2.BFMatcher()
 #detector = cv2.ORB_create()
 #matcher = cv2.BFMatcher(cv2.NORM_HAMMING)
 
-ref = cv2.imread('conan1.jpg', cv2.COLOR_BGR2GRAY)
+ref = cv2.imread('C:\\Users\\Nitro5\\Downloads\\conan\\conan1.jpg', cv2.COLOR_BGR2GRAY)
 h,w,_ = ref.shape
 ref = cv2.resize(ref,(int(w*1.0),int(h*1.0)))
 
@@ -20,6 +23,7 @@ while(True):
 
     kp2, des2 = detector.detectAndCompute(target, None)
 
+    # 2 level of match  
     matches = matcher.knnMatch(des1, des2, k=2) #Relative Matching
 
     good = []
